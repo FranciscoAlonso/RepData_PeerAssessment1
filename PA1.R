@@ -4,7 +4,7 @@ PA1 <- function()
   library(dplyr)
   steps <- read.csv("activity.csv")
   
-  #converto date to POSIXct date format
+  #convert to date format
   steps$date <- ymd(steps$date)
   
   steps <- na.omit(steps)
