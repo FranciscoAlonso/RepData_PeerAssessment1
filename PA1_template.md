@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 ## Introduction
 
@@ -28,11 +23,9 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ## Loading and preprocessing the data
 
-```{r echo=FALSE, message=FALSE,warning=FALSE}
-  library(lubridate)
-  library(dplyr)
-```
-```{r}
+
+
+```r
   steps <- read.csv("activity.csv")
 ```
 
