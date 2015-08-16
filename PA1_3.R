@@ -79,13 +79,13 @@ PA1_3 <- function()
   
   
   
-  png("P3_Dates-Steps.png")
+  png("figure/P3_Dates-Steps.png")
   plot(stepsPerDate$Dates, stepsPerDate$Steps, type = "l")
   dev.off()
-  png("P3_Dates-Mean.png")
+  png("figure/P3_Dates-Mean.png")
   plot(stepsPerDate$Dates, stepsPerDate$Mean, type = "l")
   dev.off()
-  png("P3_Dates-Median.png")
+  png("figure/P3_Dates-Median.png")
   plot(stepsPerDate$Dates, stepsPerDate$Median, type = "l")
   dev.off()
   
@@ -93,7 +93,7 @@ PA1_3 <- function()
   #Total, mean and median of total number ofsteps per day
   
   #histogram of total number of steps per day
-  png("P3_Hist-Steps.png") #create the png graph device
+  png("figure/P3_Hist-Steps.png") #create the png graph device
   hist(stepsPerDate$Steps, col = "red")
   dev.off()
   #----

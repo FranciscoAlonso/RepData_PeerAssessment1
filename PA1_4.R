@@ -107,7 +107,7 @@ PA1_4 <- function()
   Weekdays_stepsPerInterval <- mutate(Weekdays_stepsPerInterval, dayType = rep("Weekdays", length(Weekdays_stepsPerInterval$Intervals)))
   
   total <- rbind(Weekend_stepsPerInterval, Weekdays_stepsPerInterval)
-  png("WEEKENDS.png")
+  png("figure/WEEKENDS.png")
   p <- xyplot(StepsMean ~ Intervals | dayType, data = total, type = "l", layout = c(1,2))
   print(p)
   dev.off()

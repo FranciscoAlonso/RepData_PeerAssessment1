@@ -35,7 +35,12 @@ PA1_2 <- function()
   
   #interval with maximun average of steps
   maxActivityInterval <- filter(stepsPerInterval, StepsMean == max(StepsMean))
-  #print(maxActivityInterval)
+  print(maxActivityInterval)
 
-  plot(stepsPerInterval$Intervals, stepsPerInterval$StepsMean, type = "l")
+  plot(stepsPerInterval$Intervals
+       , stepsPerInterval$StepsMean
+       , type = "l"
+       , main = "Average daily activity per 5 minutes interval"
+       , xlab = "Steps mean"
+       , ylab = "5 min intervals")
 }

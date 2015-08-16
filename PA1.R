@@ -38,24 +38,31 @@ PA1 <- function()
   stepsPerDate <- mutate(stepsPerDate, Mean = stepMean)
   stepsPerDate <- mutate(stepsPerDate, Median = stepMedian)
   
-  png("P1_Dates-Steps.png") #create the png graph device
-  plot(stepsPerDate$Dates, stepsPerDate$Steps, type = "l")
-  dev.off()
-  png("P1_Dates-Mean.png") #create the png graph device
-  plot(stepsPerDate$Dates, stepsPerDate$Mean, type = "l")
-  dev.off()
-  png("P1_Dates-Median.png") #create the png graph device
-  plot(stepsPerDate$Dates, stepsPerDate$Median, type = "l")
-  dev.off()
-  
   #----
   #Total, mean and median of total number ofsteps per day
   
   #histogram of total number of steps per day
-  png("P1_Hist-Steps.png") #create the png graph device
-  hist(stepsPerDate$Steps, col = "red")
-  dev.off()
+  #png("figure/P1_Hist-Steps.png") #create the png graph device
+  hist(stepsPerDate$Steps, col = "red", main = "Histogram of the total number of steps taken each day", xlab = "Number of steps per day")
+  #dev.off()
   #----
+  
+  #png("figure/P1_Dates-Steps.png") #create the png graph device
+  #plot(stepsPerDate$Dates, stepsPerDate$Steps, type = "l")
+  #dev.off()
+  #png("figure/P1_Dates-Mean.png") #create the png graph device
+  plot(stepsPerDate$Dates, stepsPerDate$Mean, type = "l"
+       , main = "Mean of total number of steps per date"
+       , xlab = "Dates"
+       , ylab = "Mean")
+  #dev.off()
+  #png("figure/P1_Dates-Median.png") #create the png graph device
+  plot(stepsPerDate$Dates, stepsPerDate$Median, type = "l"
+       , main = "Median of total number of steps per date"
+       , xlab = "Dates"
+       , ylab = "Median")
+  #dev.off()
+  
 }
 
 myMedian <- function(x)

@@ -42,15 +42,57 @@ The data is read into the stepsActivity data.frame, the date is given format and
 
 
 ## What is mean total number of steps taken per day?
-```{r echo=FALSE, message=FALSE,warning=FALSE, results="hide"}
+
+In this part the missing values were ignored.
+
+```{r eval=FALSE}
+  hist(stepsPerDate$Steps
+       , col = "red"
+       , main = "Histogram of the total number of steps taken each day"
+       , xlab = "Number of steps per day")
+  plot(stepsPerDate$Dates
+       , stepsPerDate$Mean
+       , type = "l"
+       , main = "Mean of total number of steps per date"
+       , xlab = "Dates"
+       , ylab = "Mean")
+  plot(stepsPerDate$Dates
+       , stepsPerDate$Median
+       , type = "l"
+       , main = "Median of total number of steps per date"
+       , xlab = "Dates"
+       , ylab = "Median")
+```
+
+```{r echo=FALSE, message=F,warning=FALSE, results='hide'}
   source("PA1.R")
   PA1()
 ```
 
+As shown, for each date values for the total of steps, mean and median were calculated.
+
 
 ## What is the average daily activity pattern?
 
+Now for this part we get the 5-minute interval with with maximun number of steps:
 
+```{r eval=FALSE}
+  #interval with maximun average of steps
+  maxActivityInterval <- filter(stepsPerInterval, StepsMean == max(StepsMean))
+  print(maxActivityInterval)
+  plot(stepsPerInterval$Intervals
+       , stepsPerInterval$StepsMean
+       , type = "l"
+       , main = "Average daily activity per 5 minutes interval"
+       , xlab = "Steps mean"
+       , ylab = "5 min intervals")
+  
+```
+
+```{r echo=FALSE, message=F,warning=FALSE}
+  source("PA1_2.R")
+  PA1_2()
+```
 
 ## Imputing missing values
 
