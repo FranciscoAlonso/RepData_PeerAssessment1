@@ -82,7 +82,13 @@ img {
 </div>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<pre class="r"><code>  steps &lt;- read.csv(&quot;activity.csv&quot;)</code></pre>
+<p>The “lubridate” and “dplyr” packages are loaded:</p>
+<pre class="r"><code>  library(lubridate)
+  library(dplyr)</code></pre>
+<p>The data is read into the stepsActivity data.frame, the date is given format and the missing values are removed:</p>
+<pre class="r"><code>  stepsActivity &lt;- read.csv(&quot;activity.csv&quot;)
+  stepsActivity$date &lt;- ymd(stepsActivity$date)
+  stepsActivity &lt;- na.omit(stepsActivity)</code></pre>
 </div>
 <div id="what-is-mean-total-number-of-steps-taken-per-day" class="section level2">
 <h2>What is mean total number of steps taken per day?</h2>

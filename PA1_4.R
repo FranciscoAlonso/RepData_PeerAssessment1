@@ -66,9 +66,7 @@ PA1_4 <- function()
   
   Intervals <- seq(from = min(WeekendDays$interval), to = max(WeekendDays$interval), by = 5)
   Weekend_stepsPerInterval <- as.data.frame(Intervals, row.names(c("Intervals")))
-  
   stepMean <- c()
-  
   for(i in Intervals)
   {
     temp <- filter(WeekendDays, interval == i) %>% select(steps) %>% arrange()
@@ -81,9 +79,9 @@ PA1_4 <- function()
       stepMean <- c(stepMean, 0)
     }
   }
-  
   #steps average per interval
   Weekend_stepsPerInterval <- mutate(stepsPerInterval, StepsMean = stepMean)
+  Weekend_stepsPerInterval <- mutate(Weekend_stepsPerInterval, dayType = rep("Weekend", length(Weekend_stepsPerInterval$Intervals)))
   
   
   Intervals <- seq(from = min(WeekdayDays$interval), to = max(WeekdayDays$interval), by = 5)
@@ -106,14 +104,12 @@ PA1_4 <- function()
   
   #steps average per interval
   Weekdays_stepsPerInterval <- mutate(stepsPerInterval, StepsMean = stepMean)
+  Weekdays_stepsPerInterval <- mutate(Weekdays_stepsPerInterval, dayType = rep("Weekdays", length(Weekdays_stepsPerInterval$Intervals)))
   
-  
+  total <- rbind(Weekend_stepsPerInterval, Weekdays_stepsPerInterval)
   png("WEEKENDS.png")
-  print(xyplot(StepsMean ~ Intervals, data = Weekend_stepsPerInterval, type = "l"))
+  p <- xyplot(StepsMean ~ Intervals | dayType, data = total, type = "l", layout = c(1,2))
+  print(p)
   dev.off()
-  png("WEEKDAYS.png")
-  print(xyplot(StepsMean ~ Intervals, data = Weekdays_stepsPerInterval, type = "l"))
-  dev.off()
-  #write.csv(steps, "weekday.csv")
   
 }

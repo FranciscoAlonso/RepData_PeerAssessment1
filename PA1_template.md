@@ -23,11 +23,20 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ## Loading and preprocessing the data
 
-
+The "lubridate" and "dplyr" packages are loaded:
 
 ```r
-  steps <- read.csv("activity.csv")
+  library(lubridate)
+  library(dplyr)
 ```
+The data is read into the stepsActivity data.frame, the date is given format and the missing values are removed:
+
+```r
+  stepsActivity <- read.csv("activity.csv")
+  stepsActivity$date <- ymd(stepsActivity$date)
+  stepsActivity <- na.omit(stepsActivity)
+```
+
 
 ## What is mean total number of steps taken per day?
 
@@ -42,3 +51,5 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
