@@ -43,7 +43,10 @@ PA1 <- function()
   
   #histogram of total number of steps per day
   #png("figure/P1_Hist-Steps.png") #create the png graph device
-  hist(stepsPerDate$Steps, col = "red", main = "Histogram of the total number of steps taken each day", xlab = "Number of steps per day")
+  hist(stepsPerDate$Steps
+       , col = "red"
+       , main = "Histogram of the total number of steps taken each day"
+       , xlab = "Number of steps per day")
   #dev.off()
   #----
   

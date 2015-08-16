@@ -8,7 +8,9 @@ PA1_3 <- function()
   
   #number of missing values
   missingValues <- filter(steps, is.na(steps))
-  #print(length(missingValues$steps))
+  print("Nmber of missing values (NA):")
+  print(length(missingValues$steps))
+  
   
   stepsNoNA <- na.omit(steps)
   
@@ -79,23 +81,27 @@ PA1_3 <- function()
   
   
   
-  png("figure/P3_Dates-Steps.png")
-  plot(stepsPerDate$Dates, stepsPerDate$Steps, type = "l")
-  dev.off()
-  png("figure/P3_Dates-Mean.png")
-  plot(stepsPerDate$Dates, stepsPerDate$Mean, type = "l")
-  dev.off()
-  png("figure/P3_Dates-Median.png")
-  plot(stepsPerDate$Dates, stepsPerDate$Median, type = "l")
-  dev.off()
+#   png("figure/P3_Dates-Steps.png")
+#   plot(stepsPerDate$Dates, stepsPerDate$Steps, type = "l")
+#   dev.off()
+#   png("figure/P3_Dates-Mean.png")
+#   plot(stepsPerDate$Dates, stepsPerDate$Mean, type = "l")
+#   dev.off()
+#   png("figure/P3_Dates-Median.png")
+#   plot(stepsPerDate$Dates, stepsPerDate$Median, type = "l")
+#   dev.off()
   
   #----
   #Total, mean and median of total number ofsteps per day
   
   #histogram of total number of steps per day
-  png("figure/P3_Hist-Steps.png") #create the png graph device
-  hist(stepsPerDate$Steps, col = "red")
-  dev.off()
+  #png("figure/P3_Hist-Steps.png") #create the png graph device
+  
+  hist(stepsPerDate$Steps
+       , col = "red"
+       , main = "Histogram of the total number of steps taken each day"
+       , xlab = "Number of steps per day")
+  #dev.off()
   #----
   
 }

@@ -96,7 +96,19 @@ Now for this part we get the 5-minute interval with with maximun number of steps
 
 ## Imputing missing values
 
+Here the number of missing values in the data set is reported. As the presence of missing days may cause bias into calculations and summaries of the data a strategy for filling them is applied. This strategy consists on replacing the missing values with the average obtained for that specific interval across all days. After that, a new data set with the missing values is created.
 
+```{r eval=FALSE}
+  #number of missing values
+  missingValues <- filter(steps, is.na(steps))
+  print("Nmber of missing values (NA):")
+  print(length(missingValues$steps))
+```
+
+```{r echo=FALSE, message=F,warning=FALSE}
+  source("PA1_3.R")
+  PA1_3()
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
