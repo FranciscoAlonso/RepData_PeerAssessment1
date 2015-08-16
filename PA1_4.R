@@ -2,6 +2,7 @@ PA1_4 <- function()
 {
   library(lubridate)
   library(dplyr)
+  library(lattice)
   steps <- read.csv("activity.csv")
   
   steps$date <- ymd(steps$date)
@@ -47,6 +48,72 @@ PA1_4 <- function()
   #missingValues_after <- filter(steps, is.na(steps))
   #print(length(missingValues_after$steps))
   
+  steps <- mutate(steps, Weekday = weekdays(date))
+  steps <- mutate(steps, isWeekday = "Weekday")
   
+  for(i in 1:length(steps$Weekday))
+  {
+    if(steps$Weekday[i] == "Saturday" || steps$Weekday[i] == "Sunday")
+    {
+      steps$isWeekday[i] <- "Weekend"
+    }
+  }
+  
+  steps <- select(steps, -Weekday)
+  
+  WeekendDays <- filter(steps, isWeekday == "Weekend")
+  WeekdayDays <- filter(steps, isWeekday == "Weekday")
+  
+  Intervals <- seq(from = min(WeekendDays$interval), to = max(WeekendDays$interval), by = 5)
+  Weekend_stepsPerInterval <- as.data.frame(Intervals, row.names(c("Intervals")))
+  
+  stepMean <- c()
+  
+  for(i in Intervals)
+  {
+    temp <- filter(WeekendDays, interval == i) %>% select(steps) %>% arrange()
+    if(length(temp$steps) > 0)
+    {
+      stepMean <- c(stepMean, mean(temp$steps, na.rm = T))
+    }
+    else
+    {
+      stepMean <- c(stepMean, 0)
+    }
+  }
+  
+  #steps average per interval
+  Weekend_stepsPerInterval <- mutate(stepsPerInterval, StepsMean = stepMean)
+  
+  
+  Intervals <- seq(from = min(WeekdayDays$interval), to = max(WeekdayDays$interval), by = 5)
+  Weekdays_stepsPerInterval <- as.data.frame(Intervals, row.names(c("Intervals")))
+  
+  stepMean <- c()
+  
+  for(i in Intervals)
+  {
+    temp <- filter(WeekdayDays, interval == i) %>% select(steps) %>% arrange()
+    if(length(temp$steps) > 0)
+    {
+      stepMean <- c(stepMean, mean(temp$steps, na.rm = T))
+    }
+    else
+    {
+      stepMean <- c(stepMean, 0)
+    }
+  }
+  
+  #steps average per interval
+  Weekdays_stepsPerInterval <- mutate(stepsPerInterval, StepsMean = stepMean)
+  
+  
+  png("WEEKENDS.png")
+  print(xyplot(StepsMean ~ Intervals, data = Weekend_stepsPerInterval, type = "l"))
+  dev.off()
+  png("WEEKDAYS.png")
+  print(xyplot(StepsMean ~ Intervals, data = Weekdays_stepsPerInterval, type = "l"))
+  dev.off()
+  #write.csv(steps, "weekday.csv")
   
 }
