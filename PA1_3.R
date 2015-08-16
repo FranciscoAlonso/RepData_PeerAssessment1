@@ -8,7 +8,7 @@ PA1_3 <- function()
   
   #number of missing values
   missingValues <- filter(steps, is.na(steps))
-  print("Nmber of missing values (NA):")
+  print("Number of missing values (NA):")
   print(length(missingValues$steps))
   
   

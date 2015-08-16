@@ -204,7 +204,7 @@ Here the number of missing values in the data set is reported. Since the presenc
 
 
 ```
-## [1] "Nmber of missing values (NA):"
+## [1] "Number of missing values (NA):"
 ## [1] 2304
 ```
 
@@ -219,6 +219,25 @@ For this last part a factor variable is added to the dataset with the filled-in 
 
 
 ```r
+  #Adding new factor variable isWeekday
+  stepsActivity <- mutate(stepsActivity, Weekday = weekdays(date))
+  stepsActivity <- mutate(stepsActivity, isWeekday = "Weekday")
+  
+  for(i in 1:length(steps$Weekday))
+  {
+    if(stepsActivity$Weekday[i] == "Saturday" || stepsActivity$Weekday[i] == "Sunday")
+    {
+      stepsActivity$isWeekday[i] <- "Weekend"
+    }
+  }
+  
+  stepsActivity <- select(stepsActivity, -Weekday)
+  
+  WeekendDays <- filter(stepsActivity, isWeekday == "Weekend")
+  WeekdayDays <- filter(stepsActivity, isWeekday == "Weekday")
+  
+  #...
+  WeekdaysAndweekends <- rbind(Weekend_stepsPerInterval, Weekdays_stepsPerInterval)
   p <- xyplot(StepsMean ~ Intervals | dayType, data = WeekdaysAndweekends, type = "l", layout = c(1,2))
   print(p)
 ```
